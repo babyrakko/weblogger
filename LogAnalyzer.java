@@ -55,7 +55,7 @@ public class LogAnalyzer
     public int busiestHour(){
         int busiest = 0;
         for(int hour = 0; hour < hourCounts.length; hour++){
-            if (hourCounts[hour] < hourCounts[busiest]){
+            if (hourCounts[hour] > hourCounts[busiest]){
                 hour = busiest;
             }
         }
