@@ -12,7 +12,9 @@ public class LogAnalyzer
     private int[] hourCounts;
     // Use a LogfileReader to access the data.
     private LogfileReader reader;
-
+    // question 1: 10 am, 2pm and 6pm
+    // question 2: used once in each method that counts the hour
+    // question 3: nothing changes
     /**
      * Create an object to analyze hourly web accesses.
      */
@@ -20,9 +22,13 @@ public class LogAnalyzer
     { 
         // Create the array object to hold the hourly
         // access counts.
-        hourCounts = new int[HOURS_PER_DAY];
+        hourCounts = new int[24];
         // Create the reader to obtain the data.
-        reader = new LogfileReader();
+        reader = new LogfileReader(); 
+        //question 7:
+        numberOfAccesses();
+        //question 8:
+        busiestHour();
     }
 
     /**
@@ -30,11 +36,40 @@ public class LogAnalyzer
      */
     public void analyzeHourlyData()
     {
+        // question 4:
         while(reader.hasNext()) {
             LogEntry entry = reader.next();
             int hour = entry.getHour();
             hourCounts[hour]++;
         }
+    }
+    //question 5:
+    public int numberOfAccesses(){
+        int total = 0;
+        for(int hour = 0; hour < hourCounts.length; hour++){
+            total += hourCounts[hour];
+        }
+        return total;
+    }
+    //question 8:
+    public int busiestHour(){
+        int busiest = 0;
+        for(int hour = 0; hour < hourCounts.length; hour++){
+            if (hourCounts[hour] < hourCounts[busiest]){
+                hour = busiest;
+            }
+        }
+        return busiest;
+    }
+    //question 9:
+    public int quietestHour(){
+        int quietest = 0;
+        for(int hour = 0; hour < hourCounts.length; hour++){
+            if (hourCounts[hour] < hourCounts[quietest]){
+                hour = quietest;
+            }
+        }
+        return quietest;
     }
 
     /**
