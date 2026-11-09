@@ -18,13 +18,14 @@ public class LogAnalyzer
     /**
      * Create an object to analyze hourly web accesses.
      */
-    public LogAnalyzer()
+    //question 5:
+    public LogAnalyzer(String filename)
     { 
         // Create the array object to hold the hourly
         // access counts.
         hourCounts = new int[24];
         // Create the reader to obtain the data.
-        reader = new LogfileReader(); 
+        reader = new LogfileReader(filename); 
         //question 7:
         numberOfAccesses();
         //question 8:
@@ -60,12 +61,13 @@ public class LogAnalyzer
             }
         }
         return busiest;
+        //question 10: it just returns the max number of hourCounts
     }
     //question 9:
     public int quietestHour(){
         int quietest = 0;
         for(int hour = 0; hour < hourCounts.length; hour++){
-            if (hourCounts[hour] < hourCounts[quietest]){
+            if (hourCounts[hour] > hourCounts[quietest]){
                 hour = quietest;
             }
         }
